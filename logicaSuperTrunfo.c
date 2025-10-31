@@ -8,10 +8,10 @@
 int main() {
     // Definição das variáveis para armazenar as propriedades das cidades
     // Você pode utilizar o código do primeiro desafio
-    char estado_A[50], estado_B[50], codigo1[10], codigo2[10], cidade1[50], cidade2[50], escolha1, escolha2;
+    char estado_A[50], estado_B[50], codigo1[10], codigo2[10], cidade1[50], cidade2[50], escolha1, escolha2, nomeatributo1[50], nomeatributo2[50];
     unsigned long int populacao1, populacao2;
-    int turismo1, turismo2, resultado1, resultado2;
-    float area1, area2, PIB1, PIB2, densipop1, densipop2, pibcap1, pibcap2, superpoder1, superpoder2;
+    int turismo1, turismo2, Primeiradisputa, Segundadisputa;
+    float area1, area2, PIB1, PIB2, densipop1, densipop2, pibcap1, pibcap2, superpoder1, superpoder2, primeiroatributo1, segundoatributo1, primeiroatributo2, segundoatributo2, soma1, soma2;
     
     // Cadastro das Cartas:
     // Implemente a lógica para solicitar ao usuário que insira os dados das cidades
@@ -131,45 +131,46 @@ int main() {
     case 'a':
         printf("Você escolheu o atributo População\n");
         
-        resultado1 = populacao1 > populacao2 ? 1 : 0;
+        Primeiradisputa = populacao1 > populacao2 ? 1 : 0;
         
         break;
     case 'B':
     case 'b':
         printf("Você escolheu o atributo Área\n");
     
-        resultado1 = area1 > area2 ? 1 : 0;
+        Primeiradisputa = area1 > area2 ? 1 : 0;
 
         break;
     case 'C':
     case 'c':
         printf("Você escolheu o atributo PIB\n");
     
-        resultado1 = PIB1 > PIB2 ? 1 : 0;
+        Primeiradisputa = PIB1 > PIB2 ? 1 : 0;
 
         break;
     case 'D':
     case 'd':
         printf("Você escolheu o atributo Pontos Turísticos\n");
     
-        resultado1 = turismo1 > turismo2 ? 1 : 0;
+        Primeiradisputa = turismo1 > turismo2 ? 1 : 0;
 
         break;
     case 'E':
     case 'e':
         printf("Você escolheu o atributo Densidade Populacional\n");
     
-        resultado1 = densipop1 < densipop2 ? 1 : 0;
+        Primeiradisputa = densipop1 < densipop2 ? 1 : 0;
 
         break;
     case 'F':
     case 'f':
         printf("Você escolheu o atributo PIB per capita\n");
 
-        resultado1 = pibcap1 > pibcap2 ? 1 : 0;
+        Primeiradisputa = pibcap1 > pibcap2 ? 1 : 0;
 
         break;
         
+    //No caso de o jogador inserir um caractere diferente das opções A-F o programa executa o default e interrompe o programa;   
     default:
         printf("Opção inválida!\n");
 
@@ -199,42 +200,42 @@ int main() {
         case 'a':
             printf("Você escolheu o atributo População\n");
         
-            resultado2 = populacao1 > populacao2 ? 1 : 0;
+            Segundadisputa = populacao1 > populacao2 ? 1 : 0;
         
             break;
         case 'B':
         case 'b':
             printf("Você escolheu o atributo Área\n");
     
-            resultado2 = area1 > area2 ? 1 : 0;
+            Segundadisputa = area1 > area2 ? 1 : 0;
 
             break;
         case 'C':
         case 'c':
             printf("Você escolheu o atributo PIB\n");
     
-            resultado2 = PIB1 > PIB2 ? 1 : 0;
+            Segundadisputa = PIB1 > PIB2 ? 1 : 0;
 
             break;
         case 'D':
         case 'd':
             printf("Você escolheu o atributo Pontos Turísticos\n");
     
-            resultado2 = turismo1 > turismo2 ? 1 : 0;
+            Segundadisputa = turismo1 > turismo2 ? 1 : 0;
 
             break;
         case 'E':
         case 'e':
             printf("Você escolheu o atributo Densidade Populacional\n");
     
-            resultado2 = densipop1 < densipop2 ? 1 : 0;
+            Segundadisputa = densipop1 < densipop2 ? 1 : 0;
 
             break;
         case 'F':
         case 'f':
             printf("Você escolheu o atributo PIB per capita\n");
 
-            resultado2 = pibcap1 > pibcap2 ? 1 : 0;
+            Segundadisputa = pibcap1 > pibcap2 ? 1 : 0;
 
             break;
         
@@ -243,21 +244,111 @@ int main() {
 
             break;
         }
-    }
-
-    //Resultado da disputa
     
-    if (resultado1 && resultado2){
-        printf("A carta %s venceu!!\n", codigo1);
 
-    } else if (resultado1 != resultado2){
-        printf("A disputa deu empate!\n");
+        //Resultado das disputas
+    
+        if (Primeiradisputa == 1){
+        printf("A carta %s venceu a primeira disputa!!\n", codigo1);
 
-    } else {
-        printf("A carta %s venceu!!\n", codigo2);
-    }
+        } else {
+        printf("A carta %s venceu a primeira disputa!!\n", codigo2);
+        }
 
 
+        if (Segundadisputa == 1){
+            printf("A carta %s venceu a segunda disputa!!\n", codigo1);
+
+        } else {
+            printf("A carta %s venceu a segunda disputa!!\n", codigo2);
+        }
+
+        //Cálculo da soma dos atributos escolhidos para cada carta
+        //Ganha a carta com a maior soma dos dois atributos escolhidos
+    
+        if (escolha1 == 'A' || escolha1 == 'a'){
+            primeiroatributo1 = populacao1;
+            primeiroatributo2 = populacao2;
+
+        } else if (escolha1 == 'B' || escolha1 == 'b'){
+            primeiroatributo1 = area1;
+            primeiroatributo2 = area2;
+        
+        } else if (escolha1 == 'C' || escolha1 == 'c'){
+            primeiroatributo1 = PIB1;
+            primeiroatributo2 = PIB2;
+        
+        } else if (escolha1 == 'D' || escolha1 == 'd'){
+            primeiroatributo1 = turismo1;
+            primeiroatributo2 = turismo2;
+        
+        } else if (escolha1 == 'E' || escolha1 == 'e'){
+            primeiroatributo1 = densipop1;
+            primeiroatributo2 = densipop2;
+        
+        } else if (escolha1 == 'F' || escolha1 == 'f'){
+            primeiroatributo1 = pibcap1;
+            primeiroatributo2 = pibcap2;
+        
+        }
+ 
+        if (escolha2 == 'A' || escolha2 == 'a'){
+            segundoatributo1 = populacao1;
+            segundoatributo2 = populacao2;
+        
+        } else if (escolha2 == 'B' || escolha2 == 'b'){
+            segundoatributo1 = area1;
+            segundoatributo2 = area2;
+        
+        } else if (escolha2 == 'C' || escolha2 == 'c'){
+            segundoatributo1 = PIB1;
+            segundoatributo2 = PIB2;
+        
+        } else if (escolha2 == 'D' || escolha2 == 'd'){
+            segundoatributo1 = turismo1;
+            segundoatributo2 = turismo2;
+        
+        } else if (escolha2 == 'E' || escolha2 == 'e'){
+            segundoatributo1 = densipop1;
+            segundoatributo2 = densipop2;
+        
+        } else if (escolha2 == 'F' || escolha2 == 'f'){
+            segundoatributo1 = pibcap1;
+            segundoatributo2 = pibcap2;
+        
+
+        }
+        
+
+        soma1 = primeiroatributo1 + segundoatributo1;
+        soma2 = primeiroatributo2 + segundoatributo2;
+
+        // Resultado final da rodada. Qual carta será que ganhou? \_'o'_/
+    
+        printf("Carta: %s\n", codigo1);
+        printf("Estado: %s\n", estado_A);
+        printf("Atributos escolhidos: %c e %c\n", escolha1, escolha2);
+        printf("Valor: %.2f e %.2f\n", primeiroatributo1, segundoatributo1);
+        printf("Soma dos atributos: %.2f\n", soma1);
+
+        printf("Carta: %s\n", codigo2);
+        printf("Estado: %s\n", estado_B);
+        printf("Atributos escolhidos: %c e %c\n", escolha1, escolha2);
+        printf("Valor: %.2f e %.2f\n", primeiroatributo2, segundoatributo2);
+        printf("Soma dos atributos: %.2f\n", soma2);
+
+        if (soma1 > soma2){
+            printf("A carta %s venceu!!!\n", codigo1);
+
+        } else if (soma1 < soma2){
+            printf("A carta %s venceu!!!\n", codigo2);
+
+        } else {
+            printf("Empatou, as duas cartas possuem somas iguais dos seus atributos\n");
+
+        }
+        
+    } //Fim do else que verifica se as escolhas são iguais
 
     return 0;
 }
